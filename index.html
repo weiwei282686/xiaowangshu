@@ -692,45 +692,104 @@ body.viewport-fit { height: 100vh; height: 100dvh; overflow: hidden; display: gr
   -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 56%, rgba(0,0,0,.82) 72%, transparent 100%);
   mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 56%, rgba(0,0,0,.82) 72%, transparent 100%);
 }
-.viewport-fit .profile-print { background-size: auto 100%; background-position: 65% center; }
-.viewport-fit .character-art { background-image: var(--rose-ink-art); background-size: auto 100%; background-position: 62% center; opacity: .65; }
-.viewport-fit .profile-visual figcaption { margin-top: 2px; letter-spacing: .065em; }
-.viewport-fit .appointment-colophon { position: relative; height: 106px; margin-top: 15px; display: flex; align-items: flex-end; }
-.viewport-fit .appointment-art { position: absolute; inset: 0 0 0 auto; width: 71%; height: 100%; margin: 0; background-size: auto 270%; background-position: right 42%; opacity: .38; }
+.viewport-fit .profile-print { background-size: auto 126%; background-position: 63% 38%; }
+.viewport-fit .character-art { background-image: var(--rose-ink-art); background-size: auto 119%; background-position: 59% 12%; opacity: .7; }
+.viewport-fit .profile-visual figcaption { margin-top: 2px; letter-spacing: .065em; justify-content: flex-end; }
+.viewport-fit .appointment-colophon { position: relative; height: 116px; margin-top: 15px; display: flex; align-items: flex-end; }
+.viewport-fit .appointment-art { position: absolute; inset: 0 0 0 auto; width: 92%; height: 100%; margin: 0; background-size: auto 310%; background-position: right 42%; opacity: .38; }
 .viewport-fit .appointment-handnote { position: relative; z-index: 1; margin: 0; padding-bottom: 10px; letter-spacing: .065em; }
-.viewport-fit .echo-print { background-size: cover; background-position: center 52%; opacity: .65; }
+.viewport-fit .echo-print { height: 180px; background-size: 114% auto; background-position: center 52%; opacity: .7; }
 .viewport-fit .echo-caption { margin-top: 1px; letter-spacing: .065em; }
-.viewport-fit.paper-mode .integrated-print { filter: brightness(0); opacity: .54; }
+.viewport-fit.paper-mode .integrated-print { filter: brightness(0); opacity: .61; }
 .viewport-fit.paper-mode .appointment-art { opacity: .3; }
 
-/* A distinct reading entrance; the name remains a quiet signature. */
-.viewport-fit .primary-button {
-  width: auto;
-  min-width: 210px;
-  min-height: 52px;
-  padding: 13px 17px;
-  gap: 30px;
-  border: 1px solid var(--ink);
-  background: var(--ink);
-  color: var(--bg);
-  font: 500 15px/1.5 var(--sans);
-  letter-spacing: .12em;
-  transition: filter .2s ease;
+.viewport-fit .page-profile,.viewport-fit .page-character { grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: 44px; }
+.viewport-fit .profile-print,.viewport-fit .character-art {
+  -webkit-mask-image: radial-gradient(ellipse 66% 58% at 53% 48%, #000 48%, rgba(0,0,0,.88) 68%, transparent 100%);
+  mask-image: radial-gradient(ellipse 66% 58% at 53% 48%, #000 48%, rgba(0,0,0,.88) 68%, transparent 100%);
 }
-.viewport-fit .primary-button:hover { filter: brightness(.9); }
+.viewport-fit[data-chapter="1"] .toolbar-note { display: none; }
+.viewport-fit[data-chapter="1"] #chapterCaption { margin-left: auto; font: 400 12px/1.7 var(--serif); letter-spacing: .12em; }
+
+/* Reading begins on the same baseline and paper as the introduction. */
+.viewport-fit .primary-button {
+  width: 206px;
+  min-width: 0;
+  min-height: 48px;
+  padding: 10px 0;
+  gap: 30px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  font: 400 20px/1.5 var(--serif);
+  letter-spacing: .13em;
+  box-shadow: none;
+  transition: border-color .2s ease;
+}
+.viewport-fit .primary-button:hover { filter: none; border-bottom-color: var(--muted); }
 .viewport-fit .primary-button:focus-visible { outline: 2px solid var(--muted); outline-offset: 5px; }
 .viewport-fit .primary-button .button-arrow { font-size: 22px; }
+
+/* Uneven, fading slips keep the four opening images together without hard frames. */
+body.viewport-fit { --slip-paper: rgba(45,54,62,.5); --slip-end: rgba(23,29,35,.04); }
+body.viewport-fit.paper-mode { --slip-paper: rgba(194,207,218,.55); --slip-end: rgba(223,232,239,.04); }
+.viewport-fit .cover-card { background: transparent; border: 0; box-shadow: none; color: var(--ink); isolation: isolate; }
+.viewport-fit .cover-me { --paper-cut: polygon(4% 0,97% 2%,100% 17%,98% 78%,94% 100%,2% 98%,0 72%,2% 11%); }
+.viewport-fit .cover-style { --paper-cut: polygon(1% 3%,92% 0,99% 5%,96% 58%,100% 94%,88% 100%,4% 97%,0 37%); }
+.viewport-fit .cover-promise { --paper-cut: polygon(5% 1%,100% 0,97% 26%,100% 78%,95% 97%,7% 100%,0 91%,2% 32%); }
+.viewport-fit .cover-echo { --paper-cut: polygon(2% 0,96% 3%,100% 35%,97% 89%,100% 97%,12% 100%,1% 95%,0 19%); }
+.viewport-fit .cover-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(150deg,var(--slip-paper),var(--slip-end));
+  clip-path: var(--paper-cut);
+  -webkit-mask-image: radial-gradient(ellipse 77% 72% at 52% 38%, #000 42%, rgba(0,0,0,.65) 73%, transparent 100%);
+  mask-image: radial-gradient(ellipse 77% 72% at 52% 38%, #000 42%, rgba(0,0,0,.65) 73%, transparent 100%);
+}
+.viewport-fit .cover-art {
+  clip-path: var(--paper-cut);
+  opacity: .87;
+  mix-blend-mode: screen;
+  -webkit-mask-image: radial-gradient(ellipse 59% 58% at 51% 49%, #000 48%, rgba(0,0,0,.88) 69%, transparent 100%);
+  mask-image: radial-gradient(ellipse 59% 58% at 51% 49%, #000 48%, rgba(0,0,0,.88) 69%, transparent 100%);
+}
+.viewport-fit.paper-mode .cover-art { filter: grayscale(1) contrast(1.3) brightness(1.16); mix-blend-mode: multiply; opacity: .78; }
+.viewport-fit .card-topline,.viewport-fit .card-bottom>small,.viewport-fit .card-arrow { color: var(--muted); }
 @media (max-width:760px) {
-  .viewport-fit .primary-button { width: 100%; max-width: 210px; min-width: 0; min-height: 46px; padding: 11px 13px; gap: 12px; font-size: 13px; letter-spacing: .06em; }
-  .viewport-fit .appointment-colophon { height: 74px; margin-top: 11px; }
+  .viewport-fit .primary-button { width: 100%; max-width: 188px; min-width: 0; min-height: 46px; padding: 9px 0; gap: 18px; font-size: 17px; letter-spacing: .055em; }
+  .viewport-fit .page-profile,.viewport-fit .page-character { grid-template-columns: minmax(0,1fr) minmax(110px,.7fr); gap: 18px; }
+  .viewport-fit .appointment-colophon { height: 82px; margin-top: 11px; }
   .viewport-fit .appointment-handnote { padding-bottom: 4px; }
-  .viewport-fit .appointment-art { width: 82%; background-size: auto 250%; }
+  .viewport-fit .appointment-art { width: 94%; background-size: auto 285%; }
   .viewport-fit .profile-print { background-position: 64% center; }
   .viewport-fit .character-art { background-position: 51% center; }
+  .viewport-fit .echo-print { height: 145px; }
 }
 @media (max-width:540px) {
-  .viewport-fit .primary-button { min-height: 44px; padding: 10px 12px; font-size: 12px; letter-spacing: .035em; }
+  .viewport-fit .primary-button { min-height: 44px; padding: 9px 0; font-size: 15px; letter-spacing: .035em; }
   .viewport-fit .primary-button .button-arrow { font-size: 19px; }
+  .viewport-fit .page-profile,.viewport-fit .page-character { gap: 12px; }
+  .viewport-fit[data-chapter="1"] #chapterCaption { font-size: 11px; }
+}
+
+/* Each slip carries one quiet chapter title; the artwork gets the remaining space. */
+.viewport-fit .deck { top: 35px; bottom: 30px; }
+.viewport-fit .cover-art { margin: 0 0 10px; }
+.viewport-fit .card-bottom { padding-top: 0; }
+.viewport-fit .card-bottom>strong { font: 400 13px/1.6 var(--serif); letter-spacing: .16em; white-space: nowrap; }
+.viewport-fit .replay-button { bottom: 0; min-width: 32px; height: 32px; padding: 0; display: grid; place-items: center; font-size: 16px; }
+@media (max-width:760px) {
+  .viewport-fit .deck { top: 21px; bottom: 28px; }
+  .viewport-fit .card-bottom>strong { font-size: 12px; }
+  .viewport-fit .cover-art { margin-bottom: 8px; }
+}
+@media (max-width:540px) {
+  .viewport-fit .deck { top: 22px; }
+  .viewport-fit .card-bottom>strong { font-size: 11px; letter-spacing: .13em; }
+  .viewport-fit .cover-art { margin-bottom: 7px; }
 }
 
 </style>
@@ -764,26 +823,20 @@ body.viewport-fit { height: 100vh; height: 100dvh; overflow: hidden; display: gr
 </div>
       </div>
       <div class="deck-scene" id="deckScene">
-        <div class="scene-caption">
-<span>四张散页，四种靠近。</span><span aria-hidden="true">01—04</span>
-</div>
         <div class="deck" id="deck" role="group" aria-label="点击一张卡片，滑入对应章节">
-          <button class="cover-card cover-me" data-page="0" aria-label="翻开第一页，初见"><span class="card-inner"><span class="card-topline"><span>I</span><span>关于我</span></span><span class="cover-art print-heron" aria-hidden="true"></span><span class="card-bottom"><strong>笑忘书</strong><small>抛下空饵，愿者上钩。</small><span class="card-arrow" aria-hidden="true">↗</span></span></span></button>
-          <button class="cover-card cover-style" data-page="1" aria-label="翻开第二页，气质"><span class="card-inner"><span class="card-topline"><span>II</span><span>偏爱与反差</span></span><span class="cover-art print-rose" aria-hidden="true"></span><span class="card-bottom"><strong>气质</strong><small>中御 / 温御</small><span class="card-arrow" aria-hidden="true">↗</span></span></span></button>
-          <button class="cover-card cover-promise" data-page="2" aria-label="翻开第三页，约定"><span class="card-inner"><span class="card-topline"><span>III</span><span>相见以前</span></span><span class="cover-art print-letter" aria-hidden="true"></span><span class="card-bottom"><strong>约定</strong><small>此后，认真感受我。</small><span class="card-arrow" aria-hidden="true">↗</span></span></span></button>
-          <button class="cover-card cover-echo" data-page="3" aria-label="翻开第四页，回声"><span class="card-inner"><span class="card-topline"><span>IV</span><span>留在这里</span></span><span class="cover-art print-tide" aria-hidden="true"></span><span class="card-bottom"><strong>回声</strong><small>发丝、命运，以及你我。</small><span class="card-arrow" aria-hidden="true">↗</span></span></span></button>
+          <button class="cover-card cover-me" data-page="0" aria-label="翻开第一页，初见"><span class="card-inner"><span class="cover-art print-heron" aria-hidden="true"></span><span class="card-bottom"><strong>初见</strong></span></span></button>
+          <button class="cover-card cover-style" data-page="1" aria-label="翻开第二页，气质"><span class="card-inner"><span class="cover-art print-rose" aria-hidden="true"></span><span class="card-bottom"><strong>气质</strong></span></span></button>
+          <button class="cover-card cover-promise" data-page="2" aria-label="翻开第三页，约定"><span class="card-inner"><span class="cover-art print-letter" aria-hidden="true"></span><span class="card-bottom"><strong>约定</strong></span></span></button>
+          <button class="cover-card cover-echo" data-page="3" aria-label="翻开第四页，回声"><span class="card-inner"><span class="cover-art print-tide" aria-hidden="true"></span><span class="card-bottom"><strong>回声</strong></span></span></button>
         </div>
-        <div class="deck-footnote">
-<span class="footnote-rule" aria-hidden="true"></span><span>选择一页，开始阅读。</span>
-</div>
-        <button class="replay-button" id="replayIntro"><span aria-hidden="true">⟳</span>再展开一次</button>
+        <button class="replay-button" id="replayIntro" aria-label="重新展开卡片" title="重新展开卡片"><span aria-hidden="true">⟳</span></button>
       </div>
       <div class="landing-bottom"><span>What place do I hold in your heart?</span></div>
     </section>
 
     <section class="reader" id="reader" aria-label="笑忘书的四页手记" hidden>
       <div class="reader-toolbar">
-<button class="back-home" id="closeArchive"><span aria-hidden="true">←</span> 收起散页</button><span id="chapterCaption">笑忘书 / 初见</span><span class="toolbar-note">慢慢读，也可以先听一首歌。</span>
+<button class="back-home" id="closeArchive"><span aria-hidden="true">←</span> 收起散页</button><span id="chapterCaption">愿者上钩。</span><span class="toolbar-note">慢慢读，也可以先听一首歌。</span>
 </div>
       <div class="page-stage" id="pageStage">
         <article class="archive-page page-profile" id="page-0" aria-labelledby="heading-0">
@@ -799,11 +852,11 @@ body.viewport-fit { height: 100vh; height: 100dvh; overflow: hidden; display: gr
             <blockquote class="profile-poem">你的誓言，<br><span>回涩在冷色调的阴雨天。</span>
 </blockquote>
             <div class="profile-last">
-<a class="profile-source" href="https://www.kdocs.cn/l/ce9jYM06XS5p" target="_blank" rel="noopener noreferrer">个人资料 <span aria-hidden="true">↗</span></a><button class="inline-button" data-page="1">再靠近一点 <span aria-hidden="true">→</span></button>
+<a class="profile-source" href="https://www.kdocs.cn/l/ce9jYM06XS5p" target="_blank" rel="noopener noreferrer">个人资料 <span aria-hidden="true">↗</span></a>
 </div>
           </div>
           <figure class="profile-visual"><div class="profile-print print-tree integrated-print" role="img" aria-label="黑白灰调的枯树与飞鸟版画"></div>
-<figcaption>愿者上钩。<span aria-hidden="true">01 / 初见</span></figcaption></figure>
+<figcaption><span aria-hidden="true">01 / 初见</span></figcaption></figure>
         </article>
 
         <article class="archive-page page-character" id="page-1" aria-labelledby="heading-1" hidden>
@@ -819,7 +872,7 @@ body.viewport-fit { height: 100vh; height: 100dvh; overflow: hidden; display: gr
 </div>
             <p class="english-question">What place do I hold<br><em>in your heart?</em></p>
             <div class="words-link">
-<a class="inline-button" href="https://www.kdocs.cn/l/ce9jYM06XS5p" target="_blank" rel="noopener noreferrer">话术一览 <span aria-hidden="true">↗</span></a><p>为保证单内体验，<br>更多话术暂不展出。</p>
+<a class="inline-button" href="https://www.kdocs.cn/l/cgWEzNtK9izP" target="_blank" rel="noopener noreferrer">话术一览 <span aria-hidden="true">↗</span></a><p>为保证单内体验，<br>更多话术暂不展出。</p>
 </div>
           </div>
           <figure class="character-visual"><div class="character-art print-rose integrated-print" role="img" aria-label="黑白灰调的玫瑰与荆棘版画"></div></figure>
@@ -883,7 +936,7 @@ body.viewport-fit { height: 100vh; height: 100dvh; overflow: hidden; display: gr
 </div>
           <div class="echoes-writing">
 <div class="echo-links">
-<a href="https://www.kdocs.cn/l/ce9jYM06XS5p" target="_blank" rel="noopener noreferrer"><span><strong>发丝</strong><small>板评 · 持续更新中</small></span><span class="echo-arrow" aria-hidden="true">↗</span></a><a href="https://www.kdocs.cn/l/ce9jYM06XS5p" target="_blank" rel="noopener noreferrer"><span><strong>命运</strong><small>冠名合集</small></span><span class="echo-arrow" aria-hidden="true">↗</span></a><a href="https://www.kdocs.cn/l/ce9jYM06XS5p" target="_blank" rel="noopener noreferrer"><span><strong>头牌一览</strong><small>头牌传送门</small></span><span class="echo-arrow" aria-hidden="true">↗</span></a>
+<a href="https://www.kdocs.cn/l/cvq9Yl3LoduH" target="_blank" rel="noopener noreferrer"><span><strong>发丝</strong><small>板评 · 持续更新中</small></span><span class="echo-arrow" aria-hidden="true">↗</span></a><a href="https://www.kdocs.cn/l/cqAk0kzTqVwt" target="_blank" rel="noopener noreferrer"><span><strong>命运</strong><small>冠名合集</small></span><span class="echo-arrow" aria-hidden="true">↗</span></a><a href="https://www.kdocs.cn/l/cqAk0kzTqVwt" target="_blank" rel="noopener noreferrer"><span><strong>头牌一览</strong><small>头牌传送门</small></span><span class="echo-arrow" aria-hidden="true">↗</span></a>
 </div>
 <div class="contact-note"><p>抛下空饵，<br><em>愿者上钩。</em></p></div>
 </div>
@@ -903,11 +956,11 @@ body.viewport-fit { height: 100vh; height: 100dvh; overflow: hidden; display: gr
 <a href="https://www.kdocs.cn/l/ce9jYM06XS5p" target="_blank" rel="noopener noreferrer">个人资料 <span aria-hidden="true">↗</span></a><div class="music-dock" id="musicDock"><button class="music-button" id="musicToggle" aria-label="播放林忆莲的纤维片段" aria-pressed="false" aria-describedby="musicState"><span class="music-disc" aria-hidden="true"><svg class="music-play" viewbox="0 0 24 24"><path d="m9 6 9 6-9 6Z"></path></svg><svg class="music-pause" viewbox="0 0 24 24"><path d="M8 6h3v12H8zm5 0h3v12h-3z"></path></svg></span><span class="music-copy"><span class="music-track">纤维 <small>林忆莲</small></span><span class="music-description"><span id="musicState" role="status" aria-live="polite">点此播放</span><span class="music-time" id="musicTime" aria-hidden="true" title="原曲 1:00–2:20，片段循环">1:00–2:20</span></span></span></button></div>
   </footer>
 
-  <audio id="backgroundMusic" src="./xianwei.mp3?v=11" preload="none" loop></audio>
+  <audio id="backgroundMusic" src="./xianwei.mp3?v=13" preload="none" loop></audio>
   <noscript>
 <style>.archive-page[hidden],.reader[hidden]{display:block!important}.landing,.reader-toolbar,.page-controls,.music-dock{display:none}.reader{display:block}.archive-page{margin-bottom:50px}.masthead button{display:none}body{height:auto!important;overflow:auto!important;display:block!important}.fit-host{position:static!important;overflow:visible!important;min-height:0!important}.fit-canvas{position:static!important;transform:none!important;max-width:100%!important}.footer{height:auto!important}</style>
 <p style="text-align:center;padding:20px">你仍然可以阅读全部资料；启用 JavaScript 后，可体验卡片展开与翻页。</p>
-<audio controls loop preload="none" src="./xianwei.mp3?v=11" aria-label="林忆莲的纤维" style="display:block;margin:20px auto"></audio>
+<audio controls loop preload="none" src="./xianwei.mp3?v=13" aria-label="林忆莲的纤维" style="display:block;margin:20px auto"></audio>
 </noscript>
 <script>
 (() => {
@@ -983,7 +1036,7 @@ body.viewport-fit { height: 100vh; height: 100dvh; overflow: hidden; display: gr
     previous.disabled = current === 0;
     next.disabled = current === pages.length - 1;
     document.getElementById('pageCounter').textContent = String(current + 1).padStart(2, '0');
-    document.getElementById('chapterCaption').textContent = '笑忘书 / ' + captions[current];
+    document.getElementById('chapterCaption').textContent = current === 0 ? '愿者上钩。' : '笑忘书 / ' + captions[current];
     document.getElementById('progressFill').style.width = ((current + 1) / pages.length * 100) + '%';
   }
   function focusHeading() {
